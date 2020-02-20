@@ -19,6 +19,7 @@ How to run
 	Following the tutorial, I have broken the code segments into commands separated by cmdN---------, so they can be more easily transferred to databricks.
 
 
+	**Please Note I left out my twitter API keys and Azure Keys so that others would not have access to them, due to the scope of the assignment the keys are included in a separate file that will only be a part of the zipped submission.
 
 
 
