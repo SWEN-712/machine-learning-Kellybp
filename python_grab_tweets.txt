@@ -21,6 +21,7 @@ final_tweets = [each_tweet.full_text for each_tweet in leonie_tweets]
 with open('/dbfs/my_tweets.txt','w') as f:
   for item in final_tweets:
     accessibility = re.findall(r"\baccessible\b|\bVoiceOver\b|\bNVDA\b|\bvoice\b|\bscreen\b|\breader\b",item)
+    #Preprocessing
     #item = item.lower()
     #item = re.sub(r'\d+','',item)
     #item = item.translate(str.maketrans("","",string.punctuation))
@@ -34,10 +35,11 @@ with open('/dbfs/my_tweets.txt','r') as f:
     print(x)
 
 cmd2-------------------------
-import pandas as pd
-data = pd.read_csv('/dbfs/my_tweets.txt',sep='\n')
-data_dict = data.to_dict()
-with open('/dbfs/mean_tweets.csv','r') as f:
-  read_tweets.append(f.read())
-  for x in read_tweets:
-    print(x)
+#Preprocessing
+#import pandas as pd
+#data = pd.read_csv('/dbfs/my_tweets.txt',sep='\n')
+#data_dict = data.to_dict()
+#with open('/dbfs/mean_tweets.csv','r') as f:
+  #read_tweets.append(f.read())
+  #for x in read_tweets:
+    #print(x)
