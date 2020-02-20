@@ -3,10 +3,6 @@ from tweepy import API
 from tweepy import Cursor
 import re
 import string
-consumer_key = "yX7EQ1S4od8pv0lzLnlAUpcox" #twitter app’s API Key
-consumer_secret = "uBtxKFJkGhfq1xDDa0ElbZFUpqmy073GNvQZZsnLiEDO32mltY" #twitter app’s API secret Key
-access_token = "1227238408139001856-lPEAC4YA0IPiBGxhXRlD4iwMGCft5h" #twitter app’s Access token
-access_token_secret = "9b8ZGFOw1ofULafGx0ColB7IkXigImNOvwyvavDYNxxmf" #twitter app’s access token secret
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
