@@ -1,0 +1,34 @@
+cmd1--------------------------
+def requestFormatter(givenTweet:String):String={
+  s"""{
+    "documents":[
+        {
+        "language":"en",
+        "id":1,
+        "text":"${givenTweet}"
+        }
+    ]
+  }"""
+}
+cmd2--------------------------
+def sendPostRequest(textAnalyticsUrl:String,subscriptionKey:String,requestBody:String):String={
+  import scalaj.http.Http
+  Thread.sleep(3000)
+  val result = Http(textAnalyticsUrl).postData(requestBody)
+  .header("Content-Type", "application/json")
+  .header("Ocp-Apim-Subscription-Key", subscriptionKey).asString
+  result.body
+}
+cmd3--------------------------
+def removeHttpLines(textLine:String):Boolean={
+  import scala.util.matching.Regex
+  val pattern = "^http".r
+  pattern.findFirstIn(textLine) match {
+    case Some(x)=>false
+    case _ => true
+  }
+}
+cmd4--------------------------
+val tweetsSentimentsRdd = sc.textFile("tweets.csv").filter(removeHttpLines).map(x=>requestFormatter(x)).map(y=>sendPostRequest("AZURE URL","AZURE KEY",y))
+cmd5--------------------------
+val tweetsSentimentList = tweetsSentimentsRdd.collect()

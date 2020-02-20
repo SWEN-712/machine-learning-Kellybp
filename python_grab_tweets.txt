@@ -1,8 +1,14 @@
+cmd1-------------------------
 from tweepy import OAuthHandler
 from tweepy import API
 from tweepy import Cursor
 import re
 import string
+
+consumer_key = ""                     	#twitter app’s API Key
+consumer_secret = ""			#twitter app’s API secret Key
+access_token = ""			#twitter app’s Access token
+access_token_secret = ""		#twitter app’s access token secret
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -14,13 +20,24 @@ final_tweets = [each_tweet.full_text for each_tweet in leonie_tweets]
 
 with open('/dbfs/my_tweets.txt','w') as f:
   for item in final_tweets:
-    item = item.lower()
-    item = re.sub(r'\d+','',item)
-    item = item.translate(str.maketrans("","",string.punctuation))
-    f.write("%s\n" % item)
+    accessibility = re.findall(r"\baccessible\b|\bVoiceOver\b|\bNVDA\b|\bvoice\b|\bscreen\b|\breader\b",item)
+    #item = item.lower()
+    #item = re.sub(r'\d+','',item)
+    #item = item.translate(str.maketrans("","",string.punctuation))
+    if accessibility:
+      f.write("%s\n" % item)
 
 read_tweets = []
 with open('/dbfs/my_tweets.txt','r') as f:
+  read_tweets.append(f.read())
+  for x in read_tweets:
+    print(x)
+
+cmd2-------------------------
+import pandas as pd
+data = pd.read_csv('/dbfs/my_tweets.txt',sep='\n')
+data_dict = data.to_dict()
+with open('/dbfs/mean_tweets.csv','r') as f:
   read_tweets.append(f.read())
   for x in read_tweets:
     print(x)
